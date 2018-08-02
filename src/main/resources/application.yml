@@ -1,8 +1,11 @@
 server:
   port: 8095
 eureka:
+  instance:
+    metadata-map:
+      cluster: ribbon # turbine被监控客户端的配置：需要配置集群名
   client:
-    # 表示eureka client间隔多久去拉取服务注册信息
+    # 表示eureka client间隔多久重新拉取服务注册信息
     registry-fetch-interval-seconds: 30 # 默认30秒
     service-url:
       defaultZone: http://localhost:8091/eureka/

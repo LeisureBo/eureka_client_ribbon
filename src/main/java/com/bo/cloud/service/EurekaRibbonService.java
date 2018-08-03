@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,7 +25,8 @@ public class EurekaRibbonService {
 	private RestTemplate restTemplate;
 	
 	// 这里调用的服务地址直接使用服务提供者在注册中心注册的应用名即可
-	private String serviceUrl = "http://eureka-client-provider";
+	@Value("${ribbon.invoke.service-url}")
+	private String serviceUrl;
 	
 	// @HystrixCommand注解对该方法创建了熔断器功能并指定了fallbackMethod熔断方法
 	@HystrixCommand(fallbackMethod = "sayError")
